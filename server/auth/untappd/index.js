@@ -22,12 +22,14 @@ var router = express.Router();
 //   }), auth.setTokenCookie);
 
 
-router.get('/auth/untappd', passport.authenticate('untappd'));
-
-router.get('/auth/untappd/callback',
-  passport.authenticate('untappd', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+router
+  .get('/', passport.authenticate('untappd', {
+    failureRedirect: '/signup',
+    session: false
+  }))
+  .get('/callback', passport.authenticate('untappd', { 
+    failureRedirect: '/signup', 
+    session: false
+  }), auth.setTokenCookie);
+  
 module.exports = router;

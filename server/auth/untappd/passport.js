@@ -9,22 +9,25 @@ exports.setup = function(User, config) {
 	}, 
 		function(accessToken, refreshToken, profile, done) {
   			User.findOne({ 
-  				'untappd.id': profile.id 
+  				'untappd': profile.id 
   			}, function(err, user) {
+  				if(err) {
+  					return done(err);
+  				}
   				if(!user) {
   					user = new User({
   						name: profile.displayName,
   						email: profile.emails[0].value,
   						role: 'user',
   						provider: 'untappd',
-  						untappd: profile._json
+  						untappd: profile.id
   					});
   					user.save(function(err) {
-  						if (err) done(err);
+  						if (err) return done(err);
   						return done(err, user);
   					});
   				} else {
-  					done(err, user);
+  					return done(err, user);
   				}
   			});
 		}
