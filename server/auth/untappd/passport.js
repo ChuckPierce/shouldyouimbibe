@@ -8,8 +8,24 @@ exports.setup = function(User, config) {
   		callbackURL: 'http://localhost:9000/auth/untappd/callback'
 	}, 
 		function(accessToken, refreshToken, profile, done) {
-  			User.findOrCreate({ 'untappd': profile.id }, function(err, user) {
-    			done(err, user);
+  			User.findOne({ 
+  				'untappd.id': profile.id 
+  			}, function(err, user) {
+  				if(!user) {
+  					user = new User({
+  						name: profile.displayName,
+  						email: profile.emails[0].value,
+  						role: 'user',
+  						provider: 'untappd',
+  						untappd: profile._json
+  					});
+  					user.save(function(err) {
+  						if (err) done(err);
+  						return done(err, user);
+  					});
+  				} else {
+  					done(err, user);
+  				}
   			});
 		}
 	));
