@@ -17,4 +17,16 @@ angular.module('beermeApp')
       $window.location.href = '/auth/' + provider;
     };
 
+    $scope.beerFav = function() {
+
+    };
+
+    $scope.beerLike = function() {
+
+    };
+
+    $scope.beerDiff = function() {
+
+    };
+
   });

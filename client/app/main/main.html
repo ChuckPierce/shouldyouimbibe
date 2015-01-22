@@ -5,19 +5,23 @@
 
 <div class="container">
   <div class="row">
-    <div ng-hide="isLoggedIn()">
       <h1 class="text-center">Beer Me</h1>
-      <div class="text-center">
+      <div class="text-center" ng-hide="isLoggedIn()">
         <a class="btn btn-untappd" ng-click="loginOauth('untappd')"><i class="fa fa-beer"></i> Login With Untappd</a>
       </div>
-    </div>
-  <div ng-repeat="beer in user.beers" ng-show="isLoggedIn()">
+
+  <div ng-show="isLoggedIn" class="text-center">
+    <a class="btn btn-primary" ng-click="beerFav()">Beer Me one of my favorites</a>
+    <a class="btn btn-primary" ng-click="beerLike()">Beer Me something I'll like</a>
+    <a class="btn btn-primary" ng-click="beerDiff()">Beer Me something different</a>
+  </div>
+  <!-- <div ng-repeat="beer in user.beers" ng-show="isLoggedIn()">
     {{$index}}
     <h4>{{beer.brewery}}: {{beer.name}}</h4>
     <h5>{{beer.style}}</h5>
     <p>{{beer.description}}</p>
     <h5>Rating: {{beer.rating}}</h5>
-  </div>
+  </div> -->
   </div>
 </div>
 
