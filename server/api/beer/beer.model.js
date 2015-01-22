@@ -9,6 +9,7 @@ var BeerSchema = new Schema({
   description: String,
   brewery: String,
   style: String,
+  rating: Number,
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
