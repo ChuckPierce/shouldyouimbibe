@@ -28,3 +28,13 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+.fa-beer {
+    font-size: 1em;
+}
+
+h1 {
+    font-size: 5em;
+}
+.btn-untappd {
+    @include button-variant(#fff, #ffcc00, #ffcc00)
+}

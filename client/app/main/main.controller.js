@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('beermeApp')
-  .controller('MainCtrl', function ($scope, $http, Auth) {
+  .controller('MainCtrl', function ($scope, $http, Auth, $window, $location) {
     $scope.awesomeThings = [];
+
+    $scope.isLoggedIn = Auth.isLoggedIn;
 
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
@@ -10,5 +12,9 @@ angular.module('beermeApp')
       //   $scope.beers = beers;
     // });
     });
+
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
+    };
 
   });
