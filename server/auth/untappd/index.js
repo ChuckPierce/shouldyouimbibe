@@ -6,22 +6,6 @@ var auth = require('../auth.service');
 
 var router = express.Router();
 
-// router
-//   .get('/', passport.authenticate('untappd', {
-//     failureRedirect: '/signup',
-//     scope: [
-//       'https://www.googleapis.com/auth/userinfo.profile',
-//       'https://www.googleapis.com/auth/userinfo.email'
-//     ],
-//     session: false
-//   }))
-
-//   .get('/callback', passport.authenticate('untappd', {
-//     failureRedirect: '/signup',
-//     session: false
-//   }), auth.setTokenCookie);
-
-
 router
   .get('/', passport.authenticate('untappd', {
     failureRedirect: '/signup',

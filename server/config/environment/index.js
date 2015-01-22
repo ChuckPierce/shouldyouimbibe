@@ -41,6 +41,12 @@ var all = {
     }
   },
 
+  untappd: {
+    clientID:     process.env.UNTAPPD_ID || '36470790E0B3A4B397A99FC76D2A3725C476A96E',
+    clientSecret: process.env.UNTAPPD_SECRET || 'CEF1DD251FD03481ED8675CCD560E4277C2E36A0',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/untappd/callback'
+  },
+
 };
 
 // Export the config object based on the NODE_ENV

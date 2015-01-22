@@ -5,6 +5,14 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['untappd'];
 
+var BeerSchema = new Schema({
+  name: String,
+  description: String,
+  brewery: String,
+  style: String,
+  rating: Number
+});
+
 var UserSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
@@ -15,8 +23,8 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  untappd: String,
-  untappdUsername: String
+  untappdId: String,
+  beers: [BeerSchema]
 });
 
 /**
