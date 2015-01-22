@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var request = require('request');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -84,13 +85,25 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
-    if (!user) return res.json(401);
-    res.json(user);
-  });
+    User.findOne({
+      _id: userId
+    }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+      if (err) return next(err);
+      if (!user) return res.json(401);
+      if (user.beers.length === 0) {
+        request('https://api.untappd.com/v4/user/beers?limit=50&access_token='+ user.accessToken, function(err, response, body) {
+          if(err) return next(err);
+          if(!err && response.statusCode === 200) {
+            var newUser = user.setBeers(body, user);
+            newUser.save(function(err, user) {
+              if (err) return validationError(res, err);
+              res.json(user);
+            });
+          }
+        });
+      }
+      res.json(user);
+    });
 };
 
 /**

@@ -24,7 +24,8 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   untappdId: String,
-  beers: [BeerSchema]
+  beers: [BeerSchema],
+  accessToken: String
 });
 
 /**
@@ -147,6 +148,22 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  setBeers: function(response, user) {
+    var result = JSON.parse(response);
+    result.response.beers.items.forEach(function(item) {
+      var beer = {
+        name: item.beer.beer_name,
+        description: item.beer.beer_description,
+        style: item.beer.beer_style,
+        rating: item.rating_score,
+        brewery: item.brewery.brewery_name
+      };
+      user.beers.push(beer);
+    });
+    console.log(user.beers);
+    return user;
   }
 };
 

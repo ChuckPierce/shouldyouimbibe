@@ -4,15 +4,16 @@
   <div class="container">
   </div>
 </header>
-<!-- {{beers.response.beers.items[0]}} -->
-<div ng-repeat="item in beers.response.beers.items">
-  <h4>{{item.beer.beer_name}}</h4>
-  <h5>{{item.beer.beer_style}}</h5>
-  <p>{{item.beer.beer_description}}</p>
-  <h5>{{item.rating_score}}</h5>
+
+<div ng-repeat="beer in user.beers">
+  {{$index}}
+  <h4>{{beer.brewery}}: {{beer.name}}</h4>
+  <h5>{{beer.style}}</h5>
+  <p>{{beer.description}}</p>
+  <h5>Rating: {{beer.rating}}</h5>
 
 </div>
-{{user}}
+<!-- {{user}} -->
 <div class="container">
   <div class="row">
     <!-- <div class="col-lg-12">

@@ -10,7 +10,7 @@ exports.setup = function(User, config) {
 		function(accessToken, refreshToken, profile, done) {
       console.log(profile);
   			User.findOne({ 
-  				'untappd': profile.id 
+  				'untappdId': profile.id 
   			}, function(err, user) {
   				if(err) {
   					return done(err);
@@ -21,7 +21,8 @@ exports.setup = function(User, config) {
   						email: profile.emails[0].value,
   						role: 'user',
   						provider: 'untappd',
-  						untappdId: profile.id
+  						untappdId: profile.id,
+              accessToken: accessToken
   					});
   					user.save(function(err) {
   						if (err) return done(err);
