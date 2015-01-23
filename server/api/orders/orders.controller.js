@@ -37,7 +37,7 @@ exports.createToken = function(req, res) {
 };
 
 exports.postToDrizly = function(req, res) {
-  request.post('https://sandbox.drizly.com/api/v2/checkout/process', req.body, function(err, response, body) {
+  request.post('https://sandbox.drizly.com/api/v2/checkout/process?token="301cc08e728c8ccaa377c5b76f6c773b"', req.body, function(err, response, body) {
     return res.json(body);
   });
 };

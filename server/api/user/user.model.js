@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
-var authTypes = ['untappd'];
+var authTypes = ['untappd', 'twitter'];
 
 var BeerSchema = new Schema({
   name: String,

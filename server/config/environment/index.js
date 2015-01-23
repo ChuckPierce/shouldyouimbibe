@@ -46,6 +46,12 @@ var all = {
     clientSecret: process.env.UNTAPPD_SECRET || 'CEF1DD251FD03481ED8675CCD560E4277C2E36A0',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/untappd/callback'
   },
+  
+  twitter: {
+    clientID:     process.env.TWITTER_ID || '4Tau3XHECsNP8aJ6eHrZbRseL',
+    clientSecret: process.env.TWITTER_SECRET || 'vFop4i1OeNNlKIImF86pZUb2ByKFCav79LoDKaYp2A6wQUwnXn',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
+  },
 
 };
 
