@@ -92,36 +92,18 @@ exports.me = function(req, res, next) {
       if (err) return next(err);
       if (!user) return res.json(401);
       var client = new Twit({
-  consumer_key: config.twitter.clientID,
-  consumer_secret: config.twitter.clientSecret,
-  access_token: config.twitter.accessTokenKey,
-  access_token_secret: config.twitter.accessTokenSecret
-});
-      // if (user.beers.length === 0) {
-      //   request('https://api.untappd.com/v4/user/beers?limit=50&access_token='+ user.accessToken, function(err, response, body) {
-      //     if(err) return next(err);
-      //     if(!err && response.statusCode === 200) {
-      //       var newUser = user.setBeers(body, user);
-      //       newUser.save(function(err, user) {
-      //         if (err) return validationError(res, err);
-      //         res.json(user);
-      //       });
-      //     }
-      //   });
-      // }
-      console.log(config.twitter.clientID);
-      console.log(config.twitter.clientSecret);
-      console.log(config.twitter.accessTokenKey);
-      console.log(config.twitter.accessTokenSecret);
+        consumer_key: config.twitter.clientID,
+        consumer_secret: config.twitter.clientSecret,
+        access_token: config.twitter.accessTokenKey,
+        access_token_secret: config.twitter.accessTokenSecret
+      });
       client.get('statuses/user_timeline', { screen_name: 'chuckmpierce', limit: 30 }, function(err, data, response) {
         var newUser = user.setTweets(data, user);
-        console.log(newUser);
         newUser.save(function(err, user) {
           if (err) return validationError(res, err);
           res.json(user);
         });
       });
-      // res.json(user);
     });
 };
 

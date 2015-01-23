@@ -12,11 +12,7 @@ exports.setup = function (User, config) {
   function(token, tokenSecret, profile, done) {
     config.twitter.accessTokenKey = token;
     config.twitter.accessTokenSecret = tokenSecret;
-    console.log(config.twitter.clientID);
-    console.log(config.twitter.clientSecret);
-    console.log(config.twitter.accessTokenKey);
-    console.log(config.twitter.accessTokenSecret);
-    User.findOne({
+      User.findOne({
       'twitter.id_str': profile.id
     }, function(err, user) {
       if (err) {
