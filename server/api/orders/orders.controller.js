@@ -4,13 +4,6 @@ var _ = require('lodash');
 var Orders = require('./orders.model');
 var braintree = require('braintree');
 
-var gateway = braintree.connect({
-  environment: braintree.Environment.Sandbox,
-  merchantId: "useYourMerchantId",
-  publicKey: "useYourPublicKey",
-  privateKey: "useYourPrivateKey"
-});
-
 // Get list of orders
 exports.index = function(req, res) {
   Orders.find(function (err, orders) {
@@ -30,10 +23,14 @@ exports.show = function(req, res) {
 
 // Creates a new orders in the DB.
 exports.create = function(req, res) {
-  Orders.create(req.body, function(err, orders) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, orders);
-  });
+  var clientToken = Orders.generateToken();
+  clientToken.then(function(token) {
+    req.body.clientToken = token;
+    Orders.create(req.body, function(err, orders) {
+      if(err) { return handleError(res, err); }
+      return res.json(201, orders);
+    });
+  })
 };
 
 // Updates an existing orders in the DB.
