@@ -1,17 +1,17 @@
-<!-- <div ng-include="'components/navbar/navbar.html'"></div> -->
+<div ng-include="'components/navbar/navbar.html'"></div>
 
 
 
 
 <div class="container">
   <div class="row">
-      <h1 class="text-center">Beer Me</h1>
+      <h1 class="text-center">Ya Need A Drink?</h1>
       <div class="text-center" ng-hide="isLoggedIn()">
-        <a class="btn btn-untappd" ng-click="loginOauth('untappd')"><i class="fa fa-beer"></i> Login With Untappd</a>
+<!--         <a class="btn btn-untappd" ng-click="loginOauth('untappd')"><i class="fa fa-beer"></i> Login With Untappd</a> -->
         <a class="btn btn-untappd" ng-click="loginOauth('twitter')"><i class="fa fa-beer"></i> Login With Twitter</a>
       </div>
 
-  <div ng-show="isLoggedIn" class="text-center">
+  <div ng-show="isLoggedIn()" class="text-center">
     <a class="btn btn-primary" ng-click="getMood()">Get Your Mood</a>
 <!--     <a class="btn btn-primary" ng-click="beerLike()">Beer Me something I'll like</a>
     <a class="btn btn-primary" ng-click="beerDiff()">Beer Me something different</a> -->
