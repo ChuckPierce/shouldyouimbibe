@@ -36,6 +36,12 @@ exports.createToken = function(req, res) {
   });
 };
 
+exports.postToDrizly = function(req, res) {
+  request.post('https://sandbox.drizly.com/api/v2/checkout/process', req.body, function(err, response, body) {
+    return res.json(body);
+  });
+};
+
 // Updates an existing orders in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

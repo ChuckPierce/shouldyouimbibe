@@ -1,7 +1,87 @@
 <div class="col-md-12">
-<form id="checkout" method="post" ng-submit="submitToDrizly()">
-  <input data-braintree-name="number" ng-model="creditCard.number" value="4111111111111111">
-  <input data-braintree-name="expiration_date" ng-model="creditCard.expirationDate" value="10/20">
+<!-- <form id="checkout" method="post" ng-submit="submitToDrizly()">
+  <input data-braintree-name="number" ng-model="creditCard.number">
+  <input data-braintree-name="expiration_date" ng-model="creditCard.expirationDate">
   <input type="submit" value="Submit Order to Drizly">
-</form>
+</form> -->
+
+<form name="checkoutForm" id="checkout" method="post" ng-submit="submitToDrizly()">
+
+				<div class='form-group'>
+					<h4>Delivery</h4>
+					<label>Name</label>
+					<input class="form-control" type="text" ng-model="order.delivery_address.full_name" name="delivery_name" ng-required="true">
+				</div>
+				<div class="form-group">
+					<div class="row">
+					<div class="col-md-7">
+						<label>Address</label>
+						<input type="text" class="form-control" ng-model="order.delivery_address.address" ng-required="true">
+					</div>
+					<div class="col-md-7">
+					<label>City</label>
+					<input type="text" name="city_delivery" class="form-control" ng-model="order.delivery_address.city" ng-required="true">
+					</div>
+					<div class="col-md-2">
+						<label ng-model="order.delivery_address.state">State</label>
+						<states></states>
+					</div>
+					<div class="col-md-3">
+						<label>Zip</label>
+						<input type="text" name="zipcode_delivery" class="form-control" maxlength="5" ng-model="order.delivery_address.zip" ng-required="true">
+					</div>
+					<div class="col-md-3">
+						<label>Phone</label>
+						<input type="phone" name="phone_delivery" class="form-control" maxlength="10" ng-model="order.delivery_address.phone" ng-required="true">
+					</div>
+					</div>
+				</div>
+
+				<div class='form-group'>
+					<h4>Billing Address</h4>
+					<label>Name</label>
+					<input class="form-control" type="text" ng-model="order.billing_address.full_name" name="billing_name" ng-required="true">
+				</div>
+				<div class="col-md-7">
+						<label>Address</label>
+						<input type="text" class="form-control" ng-model="order.billing_address.address" ng-required="true">
+					</div>
+					<div class="col-md-7">
+					<label>City</label>
+					<input type="text" name="city_delivery" class="form-control" ng-model="order.billing_address.city" ng-required="true">
+					</div>
+					<div class="col-md-2">
+						<label>State</label>
+						<states ng-model="order.billing_address.state"></states>
+					</div>
+					<div class="col-md-3">
+						<label>Zip</label>
+						<input type="text" name="zipcode_delivery" class="form-control" maxlength="5" ng-model="order.billing_address.zip" ng-required="true">
+					</div>
+					<div class="col-md-3">
+						<label>Phone</label>
+						<input type="text" name="phone_billing" class="form-control" maxlength="10" ng-model="order.billing_address.phone" ng-required="true">
+					</div>
+
+				<div class="form-group">
+					<h4>Payment Information</h4>
+					<div class="row">
+					<div class="col-md-7">
+						<label>Credit Card Number</label>
+						<input type="text" class="form-control" ng-model="creditCard.number" payments-validate="card" payments-format="card" payments-type-model="type" ng-required="true" data-braintree-name="number">
+					</div>
+					<!-- <div class="col-md-2">
+						<label>CVC</label>
+						<input type="text" class="form-control cvc" ng-model="ccinfo.cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type" ng-required="true" >
+					</div> -->
+					<div class="col-md-3">
+						<label>Expiration</label>
+						<input type="text" class="form-control" ng-model="creditCard.expirationDate" payments-validate="expiry" payments-format="expiry" ng-required="true" data-braintree-name="expiration_date">
+					</div>
+					</div>
+				</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success" ng-disabled="checkoutForm.$invalid">Submit Order</button>
+			</div>
+			</form>
 </div>
