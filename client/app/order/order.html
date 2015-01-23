@@ -1,7 +1,7 @@
 <div class="col-md-12">
 <form id="checkout" method="post" ng-submit="submitToDrizly()">
-  <input data-braintree-name="number" value="4111111111111111">
-  <input data-braintree-name="expiration_date" value="10/20">
+  <input data-braintree-name="number" ng-model="creditCard.number" value="4111111111111111">
+  <input data-braintree-name="expiration_date" ng-model="creditCard.expirationDate" value="10/20">
   <input type="submit" value="Submit Order to Drizly">
 </form>
 </div>

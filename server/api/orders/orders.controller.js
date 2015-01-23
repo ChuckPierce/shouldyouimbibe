@@ -23,14 +23,17 @@ exports.show = function(req, res) {
 
 // Creates a new orders in the DB.
 exports.create = function(req, res) {
-  var clientToken = Orders.generateToken();
-  clientToken.then(function(token) {
-    req.body.clientToken = token;
     Orders.create(req.body, function(err, orders) {
       if(err) { return handleError(res, err); }
       return res.json(201, orders);
     });
-  })
+};
+
+exports.createToken = function(req, res) {
+  var clientToken = Orders.generateToken();
+  clientToken.then(function(token) {
+    return res.json(201, token);
+  });
 };
 
 // Updates an existing orders in the DB.
