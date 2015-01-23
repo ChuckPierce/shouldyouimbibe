@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
+router.post('/postToDrizly', controller.postToDrizly);
 router.post('/getToken', controller.createToken);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

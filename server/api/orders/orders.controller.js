@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Orders = require('./orders.model');
 var braintree = require('braintree');
+var request = require('request');
 
 // Get list of orders
 exports.index = function(req, res) {
@@ -37,7 +38,7 @@ exports.createToken = function(req, res) {
 };
 
 exports.postToDrizly = function(req, res) {
-  request.post('https://sandbox.drizly.com/api/v2/checkout/process?token="301cc08e728c8ccaa377c5b76f6c773b"', req.body, function(err, response, body) {
+  request.get('https://sandbox.drizly.com/api/v2/auth/token?token="301cc08e728c8ccaa377c5b76f6c773b"', function(err, response, body) {
     return res.json(body);
   });
 };

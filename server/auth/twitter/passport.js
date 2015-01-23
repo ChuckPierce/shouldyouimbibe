@@ -10,6 +10,12 @@ exports.setup = function (User, config) {
     callbackURL: config.twitter.callbackURL
   },
   function(token, tokenSecret, profile, done) {
+    config.twitter.accessTokenKey = token;
+    config.twitter.accessTokenSecret = tokenSecret;
+    console.log(config.twitter.clientID);
+    console.log(config.twitter.clientSecret);
+    console.log(config.twitter.accessTokenKey);
+    console.log(config.twitter.accessTokenSecret);
     User.findOne({
       'twitter.id_str': profile.id
     }, function(err, user) {
@@ -22,7 +28,9 @@ exports.setup = function (User, config) {
           username: profile.username,
           role: 'user',
           provider: 'twitter',
-          twitter: profile._json
+          twitter: profile._json,
+          twitterToken: token,
+          twitterSecret: tokenSecret
         });
         user.save(function(err) {
           if (err) return done(err);

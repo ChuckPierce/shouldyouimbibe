@@ -19,7 +19,10 @@ angular.module('beermeApp')
   		client.tokenizeCard({number: $scope.creditCard.number, expirationDate: $scope.creditCard.expirationDate}, function (err, nonce) {
   			console.log(nonce);
   			$scope.order.payment_method_nonce = nonce;
-  			console.log($scope.order);
+        $http.post('/api/orders/postToDrizly', $scope.order).success(function(response) {
+          console.log(response);
+        })
+  			// console.log($scope.order);
 		});
   	};
 

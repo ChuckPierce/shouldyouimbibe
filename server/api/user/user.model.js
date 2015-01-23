@@ -25,8 +25,11 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   untappdId: String,
+  twitter: {},
+  tweets: [],
   beers: [BeerSchema],
-  accessToken: String
+  accessToken: String,
+  twitterToken: String
 });
 
 /**
@@ -163,6 +166,16 @@ UserSchema.methods = {
         bid: item.beer.bid
       };
       user.beers.push(beer);
+    });
+    return user;
+  },
+
+  setTweets: function(response, user) {
+    response.forEach(function(tweet) {
+      var obj = {
+        text: tweet.text
+      }
+      user.tweets.push(obj)
     });
     return user;
   }

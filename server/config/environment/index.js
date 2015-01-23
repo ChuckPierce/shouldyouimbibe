@@ -50,7 +50,11 @@ var all = {
   twitter: {
     clientID:     process.env.TWITTER_ID || '4Tau3XHECsNP8aJ6eHrZbRseL',
     clientSecret: process.env.TWITTER_SECRET || 'vFop4i1OeNNlKIImF86pZUb2ByKFCav79LoDKaYp2A6wQUwnXn',
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback',
+    accessTokenKey: process.env.TWITTER_ACCESS_KEY || '376346905-1YUpNc177GqbeDBp4mUBfvWKcnqakVPrY1IAq01G',
+    accessTokenSecret: process.env.TWITTER_ACCESS_SECRET || 'E11pcskAxO3aSkkWKtIVSDGZV5qs63104XgbKPgK22YEC',
+    userToken: '',
+    userSecret: ''
   },
 
 };
