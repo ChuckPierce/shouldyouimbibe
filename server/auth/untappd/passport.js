@@ -8,7 +8,6 @@ exports.setup = function(User, config) {
   		callbackURL: config.untappd.callbackURL
 	}, 
 		function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
   			User.findOne({ 
   				'untappdId': profile.id 
   			}, function(err, user) {

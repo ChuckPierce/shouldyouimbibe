@@ -10,7 +10,8 @@ var BeerSchema = new Schema({
   description: String,
   brewery: String,
   style: String,
-  rating: Number
+  rating: Number,
+  bid: Number
 });
 
 var UserSchema = new Schema({
@@ -158,11 +159,11 @@ UserSchema.methods = {
         description: item.beer.beer_description,
         style: item.beer.beer_style,
         rating: item.rating_score,
-        brewery: item.brewery.brewery_name
+        brewery: item.brewery.brewery_name,
+        bid: item.beer.bid
       };
       user.beers.push(beer);
     });
-    console.log(user.beers);
     return user;
   }
 };

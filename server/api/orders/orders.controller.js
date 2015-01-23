@@ -2,6 +2,14 @@
 
 var _ = require('lodash');
 var Orders = require('./orders.model');
+var braintree = require('braintree');
+
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "useYourMerchantId",
+  publicKey: "useYourPublicKey",
+  privateKey: "useYourPrivateKey"
+});
 
 // Get list of orders
 exports.index = function(req, res) {
