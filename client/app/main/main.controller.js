@@ -12,24 +12,22 @@ angular.module('beermeApp')
       $window.location.href = '/auth/' + provider;
     };
 
-    $scope.beerFav = function() {
-      var favs = [];
-      angular.forEach($scope.user.beers, function(beer) {
-        if(beer.rating >= 4.5) {
-          favs.push(beer);
-        }
+    // $scope.beerFav = function() {
+    //   var favs = [];
+    //   angular.forEach($scope.user.beers, function(beer) {
+    //     if(beer.rating >= 4.5) {
+    //       favs.push(beer);
+    //     }
+    //   });
+    //   var ranIndex = Math.floor(Math.random()*(favs.length-1));
+    //   console.log(ranIndex);
+    //   console.log(favs[ranIndex]);
+    // };
+
+    $scope.getMood = function() {
+      $http.post('/api/users/getMood', $scope.user.tweets).success(function(moodNum) {
+        console.log(moodNum);
       });
-      var ranIndex = Math.floor(Math.random()*(favs.length-1));
-      console.log(ranIndex);
-      console.log(favs[ranIndex]);
-    };
-
-    $scope.beerLike = function() {
-
-    };
-
-    $scope.beerDiff = function() {
-
     };
 
   });

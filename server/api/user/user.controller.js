@@ -6,6 +6,8 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var request = require('request');
 var Twit = require('twit');
+var AlchemyAPI = require('alchemy-api');
+var alchemy = new AlchemyAPI('bf1bc95ba11e991dc3e73fc631a3d8323b3eef71');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -113,3 +115,18 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+exports.getMood = function(req, res) {
+  var tweetArray = [];
+  req.body.forEach(function(tweet) {
+    tweetArray.push(tweet.text);
+  })
+  var tweetText = tweetArray.join(' ');
+  // console.log(tweetText);
+  alchemy.sentiment(tweetText, {outputMode:'json'}, function(err, response) {
+    var sentiment = response.docSentiment;
+    console.log(sentiment);
+    res.json(sentiment);
+  });
+}
+
