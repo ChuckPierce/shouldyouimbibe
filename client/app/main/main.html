@@ -22,6 +22,17 @@
   </div> -->
   <div ng-show="mood" class="text-center"><h3>{{mood}}</h3></div>
   </div>
+<div class='row'>
+  <div class="col-md-5">
+ <img src="{{products.items[products.ranNum].image_url}}">
+</div>
+  <div class="col-md-7">
+  <h4>{{products.items[products.ranNum].name}}</h4>
+  <h5>{{products.items[products.ranNum].price}}</h5>
+</div>
+<a class="btn btn-primary" href="/order" ng-show="products">Order Now!</a>
+</div>
+
 </div>
 
 
