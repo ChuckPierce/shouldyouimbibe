@@ -12,15 +12,19 @@ angular.module('beermeApp')
 
   	$scope.creditCard = {
       number: '',
-      expirationDate: ''
+      expirationDate: '',
+      cvv: ''
     };
 
+    $scope.order = {};
+
   	$scope.submitToDrizly = function() {
-  		client.tokenizeCard({number: $scope.creditCard.number, expirationDate: $scope.creditCard.expirationDate}, function (err, nonce) {
+  		client.tokenizeCard({number: $scope.creditCard.number, expirationDate: $scope.creditCard.expirationDate, cvv: $scope.creditCard.cvv}, function (err, nonce) {
   			console.log(nonce);
   			$scope.order.payment_method_nonce = nonce;
         $scope.order.lat = localStorage.lat;
         $scope.order.lon = localStorage.lon;
+        $scope.order.itemId = $scope.product.id;
         $http.post('/api/orders/postToDrizly', $scope.order).success(function(response) {
           console.log(response);
         })

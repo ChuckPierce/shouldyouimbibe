@@ -53,10 +53,10 @@ exports.productFind = function(req, res) {
 };
 
 exports.postToDrizly = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/catalog/products?location%5Blatitude%5D='+ req.body.lat +'&location%5Blongitude%5D='+ req.body.lon +'&page=1&per_page=10&container_qty=1&q='+ searchTerm +'&partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, function(err, response, body) {
-          // console.log('response from drizly', body);
-          return res.json(body);
-  });
+  // request.get('https://sandbox.drizly.com/api/v2/checkout/process?location%5Blatitude%5D='+ req.body.lat +'&location%5Blongitude%5D='+ req.body.lon +'&page=1&per_page=10&container_qty=1&q='+ searchTerm +'&partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, function(err, response, body) {
+  //         // console.log('response from drizly', body);
+  //         return res.json(body);
+  // });
 };
 
 // Updates an existing orders in the DB.

@@ -39,10 +39,6 @@ angular.module('beermeApp')
         if(moodNum.score >= 0.5) {
           $scope.mood = "You're super happy!  Have some champagne!!!"
           searchProduct('champagne');
-          // query.searchTerm = 'champagne';
-          // $http.post('/api/orders/productFind', query).success(function(product) {
-          //   $scope.product = JSON.parse(product);
-          // });
         } else if(moodNum.score < 0.5 && moodNum.score > 0.2) {
           $scope.mood = "You have a nice outlook on life.  Have some nice whiskey";
           searchProduct('whiskey');
@@ -72,10 +68,15 @@ angular.module('beermeApp')
       lon: localStorage.lon,
       searchTerm: searchTerm
     };
-    $http.post('/api/orders/productFind', query).success(function(product) {
-            $scope.products = JSON.parse(product);
-            $scope.products.ranNum = Math.floor(Math.random()*$scope.products.items.length);
+    $http.post('/api/orders/productFind', query).success(function(products) {
+            var productsParsed = JSON.parse(products);
+            var ranNum = Math.floor(Math.random()*productsParsed.items.length);
+            $scope.product = productsParsed.items[ranNum]
           });
-  }
+  };
+
+  $scope.showForm = function() {
+    $scope.form = true;
+  };
 
   });
