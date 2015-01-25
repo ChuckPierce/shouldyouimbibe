@@ -69,10 +69,10 @@
 						<label>Credit Card Number</label>
 						<input type="text" class="form-control" ng-model="creditCard.number" payments-validate="card" payments-format="card" payments-type-model="type" ng-required="true" data-braintree-name="number">
 					</div>
-					<!-- <div class="col-md-2">
-						<label>CVC</label>
-						<input type="text" class="form-control cvc" ng-model="ccinfo.cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type" ng-required="true" >
-					</div> -->
+					<div class="col-md-2">
+						<label>CVV</label>
+						<input type="text" class="form-control" ng-model="creditCard.ccv" payments-validate="cvc" payments-format="cvc" payments-type-model="type" ng-required="true" data-braintree-name="cvv">
+					</div>
 					<div class="col-md-3">
 						<label>Expiration</label>
 						<input type="text" class="form-control" ng-model="creditCard.expirationDate" payments-validate="expiry" payments-format="expiry" ng-required="true" data-braintree-name="expiration_date">
