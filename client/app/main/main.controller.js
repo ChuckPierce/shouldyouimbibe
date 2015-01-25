@@ -8,6 +8,16 @@ angular.module('beermeApp')
 
     $scope.user = Auth.getCurrentUser();
 
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position){
+      $scope.$apply(function(){
+        $scope.position = position;
+        localStorage.lat = position.coords.latitude;
+        localStorage.lon = position.coords.longitude;
+      });
+    });
+  }
+
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
