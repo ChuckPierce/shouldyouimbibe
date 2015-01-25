@@ -50,4 +50,12 @@ angular.module('beermeApp', [
         }
       });
     });
+  })
+
+  .run(function($http) {
+    $http.get('/api/orders/createDrizlyToken').success(function(response) {
+      console.log('created token');
+    }).error(function(err) {
+      console.log(err);
+    });
   });

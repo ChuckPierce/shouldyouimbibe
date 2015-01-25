@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Orders = require('./orders.model');
 var braintree = require('braintree');
 var request = require('request');
+var config = require('../../config/environment');
 
 // Get list of orders
 exports.index = function(req, res) {
@@ -37,10 +38,19 @@ exports.createToken = function(req, res) {
   });
 };
 
-exports.postToDrizly = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/auth/token?token="301cc08e728c8ccaa377c5b76f6c773b"', function(err, response, body) {
-    return res.json(body);
+exports.createDrizlyToken = function(req, res) {
+  request.get('https://sandbox.drizly.com/api/v2/auth/token?partner_token=301cc08e728c8ccaa377c5b76f6c773b', function(err, response, body) {
+   var parsed = JSON.parse(body)
+    config.drizly.dToken = parsed;
   });
+};
+
+exports.postToDrizly = function(req, res) {
+  request.get('https://sandbox.drizly.com/api/v2/catalog/products?location%5Blatitude%5D=40.8506715&location%5Blongitude%5D=-73.9407588&page=1&per_page=10&container_qty=1&partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, function(err, response, body) {
+          console.log('response from drizly', body);
+          return res.json(body);
+  });
+
 };
 
 // Updates an existing orders in the DB.

@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     Uesr = require('../user/user.model'),
     braintree = require('braintree'),
-    Q = require('q');
+    Q = require('q'),
+    request = require('request');
 
 var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
@@ -41,5 +42,15 @@ OrdersSchema.statics.generateToken = function() {
 	});
 	return deferral.promise;
 }
+
+OrdersSchema.statics.generateDrizlyToken =  function() {
+  var deferral = Q.defer();
+  request.get('https://sandbox.drizly.com/api/v2/auth/token?partner_token=301cc08e728c8ccaa377c5b76f6c773b', function(err, response, body) {
+    // console.log(body);
+    deferral.resolve(JSON.parse(body));
+    
+  });
+  return deferral.promise;
+};
 
 module.exports = mongoose.model('Orders', OrdersSchema);

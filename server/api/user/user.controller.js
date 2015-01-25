@@ -99,7 +99,7 @@ exports.me = function(req, res, next) {
         access_token: config.twitter.accessTokenKey,
         access_token_secret: config.twitter.accessTokenSecret
       });
-      client.get('statuses/user_timeline', { screen_name: user.twitter.screen_name, limit: 20 }, function(err, data, response) {
+      client.get('statuses/user_timeline', { screen_name: user.twitter.screen_name, limit: 10 }, function(err, data, response) {
         var newUser = user.setTweets(data, user);
         newUser.save(function(err, user) {
           if (err) return validationError(res, err);

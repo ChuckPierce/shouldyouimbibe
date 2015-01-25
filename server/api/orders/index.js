@@ -5,6 +5,7 @@ var controller = require('./orders.controller');
 
 var router = express.Router();
 
+router.get('/createDrizlyToken', controller.createDrizlyToken);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

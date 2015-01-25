@@ -26,7 +26,18 @@ angular.module('beermeApp')
 
     $scope.getMood = function() {
       $http.post('/api/users/getMood', $scope.user.tweets).success(function(moodNum) {
-        console.log(moodNum);
+        if(moodNum.score >= 0.5) {
+          $scope.mood = "You're super happy!  Have some champagne!!!"
+        } else if(moodNum.score < 0.5 && moodNum.score > 0.2) {
+          $scope.mood = "You have a nice outlook on life.  Have some nice whiskey"
+        } else if(moodNum.score <= 0.2 && moodNum.score >= -0.2) {
+          $scope.mood = "You're neither sad nor happy.  Have a bud, bud";
+        } else if(moodNum.score > -0.5 && moodNum.score < -0.2) {
+          $scope.mood = "You don't have a great outlook on life.  Have this bottle of vodka to drown your sorrows."
+        } else if(moodNum.score <= -0.5) {
+          $scope.mood = "You are super sad.  You probably shouldn't have a drink"
+        }
+        console.log($scope.mood);
       });
     };
 
