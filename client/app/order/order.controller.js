@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('beermeApp')
-  .controller('OrderCtrl', function ($scope, $http, $rootScope) {
+  .controller('OrderCtrl', function ($scope, $http, $rootScope, $location, $window) {
   	var client;
   	$http.post('/api/orders/getToken', {}).success(function(token) {
   		braintree.setup(token, "custom", {id: "checkout"});
@@ -30,6 +30,10 @@ angular.module('beermeApp')
 		});
           $rootScope.mood = undefined;
           $rootScope.form = 'off';
+
+          setTimeout(function() {
+            $window.location.reload();
+          }, 3000);
   	};
 
   });
