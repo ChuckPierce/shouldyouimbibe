@@ -28,6 +28,7 @@
     "passport-twitter": "^1.0.2",
     "passport-untappd": "^1.0.0",
     "q": "^1.1.2",
+    "request": "^2.51.0",
     "serve-favicon": "~2.0.1",
     "twitter": "^1.0.3"
   },
