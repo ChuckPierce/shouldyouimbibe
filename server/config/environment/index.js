@@ -48,18 +48,18 @@ var all = {
   },
   
   twitter: {
-    clientID:     process.env.TWITTER_ID || '4Tau3XHECsNP8aJ6eHrZbRseL',
-    clientSecret: process.env.TWITTER_SECRET || 'vFop4i1OeNNlKIImF86pZUb2ByKFCav79LoDKaYp2A6wQUwnXn',
+    clientID:     process.env.TWITTER_ID,
+    clientSecret: process.env.TWITTER_SECRET,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback',
-    accessTokenKey: process.env.TWITTER_ACCESS_KEY || '376346905-1YUpNc177GqbeDBp4mUBfvWKcnqakVPrY1IAq01G',
-    accessTokenSecret: process.env.TWITTER_ACCESS_SECRET || 'E11pcskAxO3aSkkWKtIVSDGZV5qs63104XgbKPgK22YEC',
+    accessTokenKey: process.env.TWITTER_ACCESS_KEY,
+    accessTokenSecret: process.env.TWITTER_ACCESS_SECRET,
     userToken: '',
     userSecret: ''
   },
 
   drizly: {
     dToken: '',
-    partner_token: process.env.DRIZLY_ID || '301cc08e728c8ccaa377c5b76f6c773b'
+    partner_token: process.env.DRIZLY_ID
   }
 
 };
