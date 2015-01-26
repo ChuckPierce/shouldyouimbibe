@@ -58,7 +58,8 @@ var all = {
   },
 
   drizly: {
-    dToken: ''
+    dToken: '',
+    partner_token: process.env.DRIZLY_ID || '301cc08e728c8ccaa377c5b76f6c773b'
   }
 
 };

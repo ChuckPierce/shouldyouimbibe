@@ -39,14 +39,14 @@ exports.createToken = function(req, res) {
 };
 
 exports.createDrizlyToken = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/auth/token?partner_token=301cc08e728c8ccaa377c5b76f6c773b', function(err, response, body) {
+  request.get('https://sandbox.drizly.com/api/v2/auth/token?partner_token='+config.drizly.partner_token+'', function(err, response, body) {
    var parsed = JSON.parse(body)
     config.drizly.dToken = parsed;
   });
 };
 
 exports.productFind = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/catalog/products?location%5Blatitude%5D='+ req.body.lat +'&location%5Blongitude%5D='+ req.body.lon +'&page=1&per_page=10&container_qty=1&q='+ req.body.searchTerm +'&partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, function(err, response, body) {
+  request.get('https://sandbox.drizly.com/api/v2/catalog/products?location%5Blatitude%5D='+ req.body.lat +'&location%5Blongitude%5D='+ req.body.lon +'&page=1&per_page=10&container_qty=1&q='+ req.body.searchTerm +'&partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
           // console.log('response from drizly', body);
           return res.json(body);
   });
@@ -54,15 +54,15 @@ exports.productFind = function(req, res) {
 
 exports.postToDrizly = function(req, res) {
   console.log(req.body);
-  request.get('https://sandbox.drizly.com/api/v2/checkout/prepare?partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, function(err, response, body) {
+  request.get('https://sandbox.drizly.com/api/v2/checkout/prepare?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
           // console.log('response from drizly', body);
           var prepare = JSON.parse(body);
           var prepareToken = prepare.payment_client_token;
-          request.post({url: 'https://sandbox.drizly.com/api/v2/checkout/process?partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken, formData: req.body }, function(err, response, payment) {
+          request.post({url: 'https://sandbox.drizly.com/api/v2/checkout/process?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken, formData: req.body }, function(err, response, payment) {
             return res.json(JSON.parse(payment));
           });
   });
-  // request.post({url: 'https://sandbox.drizly.com/api/v2/prospect?partner_token=301cc08e728c8ccaa377c5b76f6c773b&token='+ config.drizly.dToken.token, formData: thisBody}, function(err, response, body) {
+  // request.post({url: 'https://sandbox.drizly.com/api/v2/prospect?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, formData: thisBody}, function(err, response, body) {
   //   console.log(body);
   // });
 };

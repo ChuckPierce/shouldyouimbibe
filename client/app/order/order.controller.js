@@ -20,7 +20,6 @@ angular.module('beermeApp')
 
   	$scope.submitToDrizly = function() {
   		client.tokenizeCard({number: $scope.creditCard.number, expirationDate: $scope.creditCard.expirationDate, cvv: $scope.creditCard.cvv}, function (err, nonce) {
-  			console.log(nonce);
   			$scope.order.payment_method_nonce = nonce;
         $scope.order.item = {};
         $scope.order.item[$scope.product.id] = 1;
