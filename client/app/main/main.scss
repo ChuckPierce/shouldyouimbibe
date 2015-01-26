@@ -38,7 +38,10 @@ h1 {
     color: #fff;
 }
 .btn-untappd {
-    @include button-variant(#fff, #ffcc00, #ffcc00)
+    @include button-variant(#fff, #ffcc00, #ffcc00);
+}
+.btn-twitter {
+    @include button-variant(#fff, #4099FF, #4099FF);
 }
 .mood-header {
     margin-top: 5px;
