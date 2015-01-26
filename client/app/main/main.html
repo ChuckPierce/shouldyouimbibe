@@ -8,8 +8,10 @@
         <a class="btn btn-untappd" ng-click="loginOauth('twitter')"><i class="fa fa-beer"></i> Login With Twitter</a>
       </div>
 
-  <div ng-show="isLoggedIn()" class="text-center">
+  <div ng-show="isLoggedIn()">
+    <div class="text-center">
     <a class="btn btn-primary" ng-click="getMood()">Get Your Mood</a>
+    </div>
 <!--     <a class="btn btn-primary" ng-click="beerLike()">Beer Me something I'll like</a>
     <a class="btn btn-primary" ng-click="beerDiff()">Beer Me something different</a> -->
   <!-- <div ng-repeat="beer in user.beers" ng-show="isLoggedIn()">
