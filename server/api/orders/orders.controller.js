@@ -58,9 +58,9 @@ exports.postToDrizly = function(req, res) {
           // console.log('response from drizly', body);
           var prepare = JSON.parse(body);
           var prepareToken = prepare.payment_client_token;
-          request.post({url: 'https://sandbox.drizly.com/api/v2/checkout/process?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken, formData: req.body }, function(err, response, payment) {
-            return res.json(JSON.parse(payment));
-          });
+          // request.post({url: 'https://sandbox.drizly.com/api/v2/checkout/process?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken, formData: req.body }, function(err, response, payment) {
+          //   return res.json(JSON.parse(payment));
+          // });
   });
   // request.post({url: 'https://sandbox.drizly.com/api/v2/prospect?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, formData: thisBody}, function(err, response, body) {
   //   console.log(body);
