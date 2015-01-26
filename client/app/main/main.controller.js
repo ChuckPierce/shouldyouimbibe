@@ -52,7 +52,6 @@ angular.module('beermeApp')
           $scope.mood = "You are super sad.  You probably shouldn't have alcohol";
           $scope.product = {
               name: 'Water',
-              price: 0,
               image_url: 'http://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Water_pour_2_(59785756).jpg/400px-Water_pour_2_(59785756).jpg'
           };
         }

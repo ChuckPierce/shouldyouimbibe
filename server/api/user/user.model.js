@@ -171,6 +171,7 @@ UserSchema.methods = {
   },
 
   setTweets: function(response, user) {
+    user.tweets = [];
     response.forEach(function(tweet) {
       var obj = {
         text: tweet.text
