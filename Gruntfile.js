@@ -392,7 +392,7 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-          remote: 'git@heroku.com:shouldyouimbibe.git',
+          remote: 'https://git.heroku.com/shouldyouimbibe.git',
           branch: 'master'
         }
       },
