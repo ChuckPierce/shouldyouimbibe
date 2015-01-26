@@ -30,6 +30,7 @@
     "q": "^1.1.2",
     "request": "^2.51.0",
     "serve-favicon": "~2.0.1",
+    "twit": "^1.1.19",
     "twitter": "^1.0.3"
   },
   "devDependencies": {
