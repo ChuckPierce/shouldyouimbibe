@@ -33,8 +33,15 @@
   <div ng-include="'app/order/order.html'" ng-show="form" ng-controller="OrderCtrl"></div>
   <a class="btn btn-primary pull-right" ng-click="showForm()" ng-show="product && !form">Order and Deliver Now!</a>
 </div>
-
-  </div>
+    </div>
+    <div class='row' ng-show="!mood && form === 'off'">
+      <div class="col-md-12 background-white text-center">
+        <h3>Your Order is on its way!</h3>
+        <h4>{{product.name}}</h4>
+        <h5>{{product.price}}</h5>
+        <h5>{{product.short_description}}</h5>
+       <img src="{{product.image_url}}">
+    </div>
 </div>
 </div>
 </div>
