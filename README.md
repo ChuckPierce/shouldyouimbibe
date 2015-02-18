@@ -16,7 +16,7 @@ See a live version of the app [here](http://shouldyouimbibe.herokuapp.com).
 
 ### Screenshot
 
-![Should You Imbibe ](http://www.chuckmpierce.com/textbook/shouldyouimbibe-screenshot.)<br />
+![Should You Imbibe ](http://www.chuckmpierce.com/textbook/shouldyouimbibe-screenshot.png)<br />
 _Above: The main page of the application where you log in with twitter_
 
 ### Roadmap
