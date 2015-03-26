@@ -4,27 +4,27 @@
 			<img src="http://static1.squarespace.com/static/530f48c5e4b05040160cb1b5/t/534229a3e4b077ee2ed8b3c2/1396844977023/Drizly-Logo.png?format=100w" class="img-reponsive">
 		</p>
 	</div>
-		<form name="checkoutForm" id="checkout" method="post" ng-submit="submitToDrizly()">
+		<form name="checkoutForm" id="checkout" ng-submit="submitToDrizly($event)">
 
 				<div class='form-group'>
 					<h4>Delivery</h4>
 					<label>Name</label>
 					<input class="form-control" type="text" ng-model="order.delivery_address.full_name" name="delivery_name" ng-required="true">
 					<label>Email</label>
-					<input class="form-control" type="email" ng-model="order.delivery_email" name="delivery_email" ng-required="true">
+					<input class="form-control" type="email" ng-model="order.customer.email" name="delivery_email" ng-required="true">
 				</div>
 				<div class="form-group">
 					<div class="row">
 					<div class="col-md-7">
 						<label>Address</label>
-						<input type="text" class="form-control" ng-model="order.delivery_address.address" ng-required="true">
+						<input type="text" class="form-control" ng-model="order.delivery_address.address1" ng-required="true">
 					</div>
 					<div class="col-md-7">
 					<label>City</label>
 					<input type="text" name="city_delivery" class="form-control" ng-model="order.delivery_address.city" ng-required="true">
 					</div>
 					<div class="col-md-2">
-						<label ng-model="order.delivery_address.state">State</label>
+						<label>State</label>
 						<states></states>
 					</div>
 					<div class="col-md-3">
@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-md-3">
 						<label>Phone</label>
-						<input type="phone" name="phone_delivery" class="form-control" maxlength="10" ng-model="order.delivery_address.phone" ng-required="true">
+						<input type="phone" name="phone_delivery" class="form-control" maxlength="10" ng-model="order.customer.phone" ng-required="true">
 					</div>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 				<div class="row">
 				<div class="col-md-7">
 						<label>Address</label>
-						<input type="text" class="form-control" ng-model="order.billing_address.address" ng-required="true">
+						<input type="text" class="form-control" ng-model="order.billing_address.address1" ng-required="true">
 					</div>
 					<div class="col-md-7">
 					<label>City</label>
@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-md-3">
 						<label>Zip</label>
-						<input type="text" name="zipcode_delivery" class="form-control" maxlength="5" ng-model="order.billing_address.zip" ng-required="true">
+						<input type="text" name="zipcode_delivery" class="form-control" maxlength="5" ng-model="order.billing_zip" ng-required="true">
 					</div>
 					<div class="col-md-3">
 						<label>Phone</label>
@@ -86,7 +86,26 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-success">Submit Order</button>
+				<button type="submit" class="btn btn-success" id="submit">Submit Order</button>
 			</div>
-			</form>
+			<!-- <form ng-submit="submitToDrizly()" id="checkout">
+			<div class="form-group">
+					<h4>Payment Information</h4>
+					<div class="row">
+					<div class="col-md-7">
+						<label>Credit Card Number</label>
+						<input type="text" class="form-control" ng-model="creditCard.number" payments-validate="card" payments-format="card" payments-type-model="type" ng-required="true" data-braintree-name="number">
+					</div>
+					<div class="col-md-2">
+						<label>CVV</label>
+						<input type="text" class="form-control" ng-model="creditCard.cvv" payments-validate="cvc" payments-format="cvc" payments-type-model="type" ng-required="true" data-braintree-name="cvv">
+					</div>
+					<div class="col-md-3">
+						<label>Expiration</label>
+						<input type="text" class="form-control" ng-model="creditCard.expirationDate" payments-validate="expiry" payments-format="expiry" ng-required="true" data-braintree-name="expiration_date">
+					</div>
+				</div>
+			</div>
+				<button type="submit" id="submit">Submit</button>
+			</form> -->
 </div>

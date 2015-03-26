@@ -1,5 +1,5 @@
 <div>
-<select class="form-control">
-    <option value="{{state.name}}" ng-repeat="state in states">{{state.abbreviation}}</option>
+<select class="form-control" ng-options="state.name as state.abbreviation for state in states" ng-model="order.delivery_address.state">
+    <!-- <option value="{{state.name}}" ng-repeat="state in states" >{{state.abbreviation}}</option> -->
   </select>
 </div>

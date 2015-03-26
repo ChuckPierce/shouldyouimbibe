@@ -5,6 +5,7 @@ var Orders = require('./orders.model');
 var braintree = require('braintree');
 var request = require('request');
 var config = require('../../config/environment');
+var qs = require('qs');
 
 // Get list of orders
 exports.index = function(req, res) {
@@ -39,32 +40,43 @@ exports.createToken = function(req, res) {
 };
 
 exports.createDrizlyToken = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/auth/token?partner_token='+config.drizly.partner_token+'', function(err, response, body) {
+  request.post('https://sandbox.drizly.com/api/v3/auth/token?partner_token='+config.drizly.partner_token, function(err, response, body) {
    var parsed = JSON.parse(body)
-    config.drizly.dToken = parsed;
+   console.log('parsed body', parsed);
+    config.drizly.dToken = parsed.token;
+     return res.json(parsed);
   });
 };
 
 exports.productFind = function(req, res) {
-  request.get('https://sandbox.drizly.com/api/v2/catalog/products?location%5Blatitude%5D='+ req.body.lat +'&location%5Blongitude%5D='+ req.body.lon +'&page=1&per_page=10&container_qty=1&q='+ req.body.searchTerm +'&partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
+  var location = {latitude: req.body.lat, longitude: req.body.lon};
+  console.log(config.drizly.dToken.token);
+  request.get('https://sandbox.drizly.com/api/v3/catalog/search?location%5Blatitude%5D='+location.latitude+'&location%5Blongitude%5D='+location.latitude+'&q='+ req.body.searchTerm +'&partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
           // console.log('response from drizly', body);
           return res.json(body);
   });
 };
 
 exports.postToDrizly = function(req, res) {
+  console.log('got here');
+  var nameArr = req.body.delivery_address.full_name.split(" ");
+  req.body.delivery_address.first_name = nameArr[0];
+  req.body.delivery_address.last_name = nameArr[1];
+  delete req.body.delivery_address.full_name
   console.log(req.body);
-  request.get('https://sandbox.drizly.com/api/v2/checkout/prepare?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
+  var qString = qs.stringify(req.body);
+  console.log(qString);
+  // console.log(config.drizly.dToken.token);
+  request.get('https://sandbox.drizly.com/api/v3/checkout/payment_client_token?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, function(err, response, body) {
           // console.log('response from drizly', body);
           var prepare = JSON.parse(body);
           var prepareToken = prepare.payment_client_token;
-          // request.post({url: 'https://sandbox.drizly.com/api/v2/checkout/process?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken, formData: req.body }, function(err, response, payment) {
-          //   return res.json(JSON.parse(payment));
-          // });
+          request.post('https://sandbox.drizly.com/api/v3/checkout/process?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token+'&payment_client_token='+ prepareToken + qString, function(err, response, payment) {
+            console.log(payment);
+            // return res.send(200);
+            return res.json(JSON.parse(payment));
+          });
   });
-  // request.post({url: 'https://sandbox.drizly.com/api/v2/prospect?partner_token='+config.drizly.partner_token+'&token='+ config.drizly.dToken.token, formData: thisBody}, function(err, response, body) {
-  //   console.log(body);
-  // });
 };
 
 // Updates an existing orders in the DB.

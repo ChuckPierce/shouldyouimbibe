@@ -70,8 +70,10 @@ angular.module('beermeApp')
     };
     $http.post('/api/orders/productFind', query).success(function(products) {
             var productsParsed = JSON.parse(products);
-            var ranNum = Math.floor(Math.random()*productsParsed.items.length);
-            $scope.product = productsParsed.items[ranNum]
+            console.log(productsParsed);
+            var ranNum = Math.floor(Math.random()*productsParsed.results.length);
+            $scope.product = productsParsed.results[ranNum]
+            console.log($scope.product);
             if(query.searchTerm === 'budweiser') {
               $scope.product.image_url = 'http://d2xcq73ooavf75.cloudfront.net/di_42358.jpg';
             }

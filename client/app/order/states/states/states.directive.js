@@ -4,9 +4,12 @@ angular.module('beermeApp')
   .directive('states', function () {
     return {
       templateUrl: 'app/order/states/states/states.html',
-      restrict: 'EA',
-      link: function (scope, element, attrs) {
+      restrict: 'E',
+      scope: {
+        bar: '=ngModel'
       },
+      require: 'ngModel',
+      replace: true,
       controller: ['$scope', function($scope) {
       	$scope.states = [
         {
